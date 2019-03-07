@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <ios>;
+#include <iomanip>
 
 using namespace std;
 
@@ -22,21 +24,23 @@ void PrintOneMonth(int MonthNumber, int Year, int StartDayNumber)
 		int startDay = 0;
 		int DaysInWeek = 7;
 
-		// loops number of days per month + start day number
+		// loops number of days per month prints day of month
 
 		for (int i = 0; i < DaysPerMonth(MonthNumber, Year) ; ++i)
 		{
-			// gives spaces before start day
+			// loops every 7 days
 			for (int j = 0; j < DaysInWeek; j++)
 			{
+				//print spaces before start day
 				for (startDay; startDay < StartDayNumber; startDay++)
 				{
-					cout << '_' << " ";
+					cout << setw(5) << left << ' ' << " ";
 					j++;
 				}
 
-				cout << ++i << " ";
+				cout << setw(5) << left << ++i << " ";
 
+				//breaks when total days are met
 				if (i == DaysPerMonth(MonthNumber, Year))
 				{
 					break;
@@ -258,14 +262,14 @@ string GetMonth(int monthNumber)
 
 void PrintDaysOfWeek()
 {
-	cout << endl;
-	cout << "Sun";
-	cout << "Mon";
-	cout << "Tue";
-	cout << "Wed";
-	cout << "Thu";
-	cout << "Fri";
-	cout << "Sat";
+	cout  << endl;
+	cout << setw(6) << "Sun";
+	cout << setw(6) << "Mon";
+	cout << setw(6) << "Tue";
+	cout << setw(6) << "Wed";
+	cout << setw(6) << "Thu";
+	cout << setw(6) << "Fri";
+	cout << setw(6) << "Sat";
 	cout << endl;
 }
 

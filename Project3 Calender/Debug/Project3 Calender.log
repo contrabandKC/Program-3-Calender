@@ -1,4 +1,5 @@
 ﻿  Header.cpp
-c:\users\erik marquez\desktop\cpp\program3 calender\project3 calender\header.cpp(127): warning C4715: 'DaysPerMonth': not all control paths return a value
-c:\users\erik marquez\desktop\cpp\program3 calender\project3 calender\header.cpp(194): warning C4715: 'GetStartDayNumber': not all control paths return a value
+c:\users\erik marquez\desktop\cpp\program3 calender\project3 calender\header.cpp(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\erik marquez\desktop\cpp\program3 calender\project3 calender\header.cpp(131): warning C4715: 'DaysPerMonth': not all control paths return a value
+c:\users\erik marquez\desktop\cpp\program3 calender\project3 calender\header.cpp(198): warning C4715: 'GetStartDayNumber': not all control paths return a value
   Project3 Calender.vcxproj -> C:\Users\Erik Marquez\Desktop\Cpp\Program3 Calender\Debug\Project3 Calender.exe
