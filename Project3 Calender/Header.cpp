@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void PrintOneMonth(int MonthNumber, int Year, int StartDayNumber)
+void PrintOneMonth(int MonthNumber, int Year, int& StartDayNumber)
 {
 	/*PRE: MonthNumber,Year, StartDayNumber all in range
 	POST: 1 month's calendar printed to output stream, with day headers
@@ -17,20 +17,25 @@ void PrintOneMonth(int MonthNumber, int Year, int StartDayNumber)
 
 
 	
-		cout << GetMonth(MonthNumber);
+		cout << "               " << GetMonth(MonthNumber);
+
+		//Bug to be fixed: Prints out 3 extra spaces before monday January only. Rest of days are fine.
+
 		PrintDaysOfWeek();
-		cout << DaysPerMonth(MonthNumber, Year) << endl;
+		//cout << DaysPerMonth(MonthNumber, Year) << endl;
 
 		int startDay = 0;
 		int DaysInWeek = 7;
-
+		int weekDay = 0;
+		int j;
 		// loops number of days per month prints day of month
 
-		for (int i = 0; i < DaysPerMonth(MonthNumber, Year) ; ++i)
+		for (int i = 1; i <= DaysPerMonth(MonthNumber, Year) ; ++i)
 		{
 			// loops every 7 days
-			for (int j = 0; j < DaysInWeek; j++)
+			for (j = 0; j < DaysInWeek; j++)
 			{
+
 				//print spaces before start day
 				for (startDay; startDay < StartDayNumber; startDay++)
 				{
@@ -38,10 +43,12 @@ void PrintOneMonth(int MonthNumber, int Year, int StartDayNumber)
 					j++;
 				}
 
-				cout << setw(5) << left << ++i << " ";
+				cout << setw(5) << left << i++ << " ";
+
+			
 
 				//breaks when total days are met
-				if (i == DaysPerMonth(MonthNumber, Year))
+				if (i > DaysPerMonth(MonthNumber, Year))
 				{
 					break;
 				}
@@ -49,13 +56,19 @@ void PrintOneMonth(int MonthNumber, int Year, int StartDayNumber)
 			}
 			cout << endl;
 
-	
+			i--;
 
 		}
 
 
+		//Sets start day number for the following month
+		StartDayNumber = j +1;
 
-	
+		if (StartDayNumber == 7)
+		{
+			StartDayNumber = 0;
+
+		}
 	
 
 }
@@ -75,51 +88,51 @@ int DaysPerMonth(int MonthNumber, int Year)
 	}
 	switch (MonthNumber)
 	{
-	case 1:
+	case 0:
 
 		return 31;
 
-	case 2:
+	case 1:
 
 		if (leapYear == true)
 		{
-			cout << "Is leap ";
+			//cout << "Is leap ";
 			return 29;
 		}
 		else
 		{
 			return 28;
 		}
-	case 3:
+	case 2:
 
 		return 31;
+
+	case 3:
+
+		return 30;
 
 	case 4:
 
-		return 30;
-
+		return 31;
 	case 5:
 
-		return 31;
+		return 30;
 	case 6:
 
-		return 30;
+		return 31;
 	case 7:
 
 		return 31;
 	case 8:
 
-		return 31;
+		return 30;
 	case 9:
 
-		return 30;
+		return 31;
 	case 10:
 
-		return 31;
-	case 11:
-
 		return 30;
-	case 12:
+	case 11:
 
 		return 31;
 
@@ -144,9 +157,15 @@ int GetStartDayNumber()
 	bool asking = true;
 
 	while (asking) {
-		cout << "\nWhat day of the week does Jan 1 fall on this year? \n";
+		cout << "\nWhat day of the week does Jan 1 fall on this year?";
 
 		cin >> userInput;
+
+		for (auto& x : userInput) {
+			x = toupper(x);
+		}
+
+		cout << endl;
 
 
 		//userInput = toupper(userInput);
@@ -232,6 +251,8 @@ int GetYear()
 
 string GetMonth(int monthNumber)
 {
+	//Returns month with int 0-10
+
 	if (monthNumber == 0)
 		return "JANUARY";
 	else if (monthNumber == 1)
@@ -245,7 +266,7 @@ string GetMonth(int monthNumber)
 	else if (monthNumber == 5)
 		return "JUNE";
 	else if (monthNumber == 6)
-		return "JULT";
+		return "JULY";
 	else if (monthNumber == 7)
 		return "AUGUST";
 	else if (monthNumber == 8)
@@ -256,12 +277,12 @@ string GetMonth(int monthNumber)
 		return "NOVEMBER";
 	else // (weekday == 6)
 		return "DECEMBER";
-
-	return string();
 }
 
 void PrintDaysOfWeek()
 {
+	//Prints days of week
+
 	cout  << endl;
 	cout << setw(6) << "Sun";
 	cout << setw(6) << "Mon";
